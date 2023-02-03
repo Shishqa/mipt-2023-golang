@@ -1,0 +1,11 @@
+test:
+  variables:
+    POSTGRES_PASSWORD: postgres
+  image: golang:latest
+  services:
+    - postgres:latest
+  script:
+    - go mod tidy
+    - go test ./...
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^homework/
