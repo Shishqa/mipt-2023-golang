@@ -1,4 +1,2 @@
 .devcontainer
 .DS_Store
-Dockerfile
-docker-compose.yml

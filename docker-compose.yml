@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  pokemon-db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+
+  pokemon-server:
+    build: .
+    restart: always
+    environment:
+      POSTGRES_DSN: host=pokemon-db user=postgres password=postgres dbname=postgres port=5432 sslmode=disable
+    ports:
+      - "3000:8080"
+    depends_on:
+      - pokemon-db

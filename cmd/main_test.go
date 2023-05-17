@@ -14,7 +14,7 @@ import (
 )
 
 func TestAddPokemon(t *testing.T) {
-	c := exec.Command("go", "run", "main.go")
+	c := exec.Command("go", "run", ".")
 
 	if err := c.Start(); err != nil {
 		t.Error(err)

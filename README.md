@@ -1,17 +1,28 @@
-Ваша задача написать локальный REST API сервер с локальной базой данных PostgreSQL для хранения покемонов. У сервера должен быть всего один эндпоинт `/pokemons`. Этот эндпоинт должен поддерживать следующие операции:
-- Добавить покемона
-- Получить список всех покемонов
-- Получить покемона по его ID
+# Pokemon server
 
-# Требования
+> Ваша задача написать локальный REST API сервер с локальной базой данных PostgreSQL для хранения покемонов. У сервера должен быть всего один эндпоинт `/pokemons`. Этот эндпоинт должен поддерживать следующие операции:
+> - Добавить покемона
+> - Получить список всех покемонов
+> - Получить покемона по его ID
 
-- https://github.com/julienschmidt/httprouter
-- https://github.com/go-gorm/gorm
-- Структура Pokemon лежит в `listing.pokemon`
-- Возвращать правильные HTTP статусы (см. тесты)
-- Сервер слушает порт 8080
+## API
 
-# Рекомендации
+- GET /pokemons
+- GET /pokemons/:id
+- POST /pokemons
 
-- Лучше всего использовать [Docker Compose](https://docs.docker.com/compose/) для поднятия локальной БД.
-- ~~В `.gitlab-ci.yml` есть команды для поднятия локальной БД (Linux)~~
+Структура Pokemon описана в [listing/pokemon.go](./listing/pokemon.go)
+
+## Запуск
+
+```
+docker compose build
+docker compose up
+```
+
+## Тестирование
+
+```
+docker compose up pokemon-db
+POSTGRES_DSN="host=localhost user=postgres password=postgres dbname=postgres port=5432 sslmode=disable" && go test ./...
+```
